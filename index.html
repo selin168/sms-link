@@ -45,7 +45,6 @@
       display:inline-block; padding:6px 10px; border-radius:999px;
       background:#ffd6e9; color:#8c2b57; font-weight:600; margin-top:8px;
     }
-    .note{ margin-top:10px; font-size:.85rem; color:var(--muted) }
     .spacer{ height:14px }
   </style>
 </head>
@@ -60,21 +59,12 @@
     <!-- SMS -->
     <section class="section" aria-labelledby="sms-heading">
       <div class="label" id="sms-heading">
-        <!-- kleine Sprechblase -->
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Zm-2 10H6v-2h12v2Zm0-4H6V6h12v2Z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Zm-2 10H6v-2h12v2Zm0-4H6V6h12v2Z"/></svg>
         SMS
       </div>
 
       <a id="smsBtn" class="btn">📩 SMS schreiben</a>
-      <p class="sub">Die SMS öffnet sich mit dem Text: „Hey Selin wie sind deine Preise und dein Service?“</p>
       <div class="chip">📱 +49 1573 5189824</div>
-      <p id="iosNote" class="note" hidden>
-        Hinweis: Auf iOS wird der Nachrichtentext oft nicht automatisch eingefügt.
-        Er erscheint dann unten zum Kopieren.
-      </p>
-      <p id="copyWrap" class="note" hidden>
-        Text zum Einfügen: <strong id="copyText"></strong>
-      </p>
     </section>
 
     <div class="spacer"></div>
@@ -82,8 +72,7 @@
     <!-- Telegram -->
     <section class="section" aria-labelledby="tg-heading">
       <div class="label" id="tg-heading">
-        <!-- Telegram Paperplane -->
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m9.03 16.88 8.12 4.71c.74.43 1.67-.17 1.5-.99L16.5 3.3a1 1 0 0 0-1.54-.64L3.4 9.5c-.76.52-.57 1.7.31 1.96l5.53 1.65 6.48-6.48-6.69 8.25Z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="m9.03 16.88 8.12 4.71c.74.43 1.67-.17 1.5-.99L16.5 3.3a1 1 0 0 0-1.54-.64L3.4 9.5c-.76.52-.57 1.7.31 1.96l5.53 1.65 6.48-6.48-6.69 8.25Z"/></svg>
         Telegram
       </div>
 
@@ -93,24 +82,10 @@
   </main>
 
   <script>
-    // Deine Nummer & Standardtext
+    // nur die Nummer, kein Body
     const PHONE  = '+4915735189824';
-    const TEXT   = 'Hey Selin wie sind deine Preise und dein Service?';
-
-    // iOS befüllt den Body-Text meist nicht → Fallback-Hinweis
-    const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-    const smsHref = isIOS
-      ? `sms:${encodeURIComponent(PHONE)}`
-      : `sms:${encodeURIComponent(PHONE)}?body=${encodeURIComponent(TEXT)}`;
-
-    const smsBtn = document.getElementById('smsBtn');
-    smsBtn.href = smsHref;
-
-    if (isIOS) {
-      document.getElementById('iosNote').hidden = false;
-      document.getElementById('copyWrap').hidden = false;
-      document.getElementById('copyText').textContent = TEXT;
-    }
+    const smsHref = `sms:${encodeURIComponent(PHONE)}`;
+    document.getElementById('smsBtn').href = smsHref;
   </script>
 </body>
 </html>
