@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SMS senden (Redirect)</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;padding:2rem;max-width:720px;margin:auto}
+    button{font-size:1rem;padding:.6rem 1rem;border-radius:8px;border:1px solid #ccc;cursor:pointer}
+    a.fallback{display:inline-block;margin-top:1rem}
+  </style>
+</head>
+<body>
+  <h1>SMS senden</h1>
+  <p>Klicke den Button, um die SMS-App zu öffnen (funktioniert auf Mobilgeräten).</p>
+  <button id="send">SMS senden</button>
+  <p><a id="smsLink" class="fallback" href="#">Falls nichts passiert: Link öffnen</a></p>
+
+  <script>
+    // Telefonnummer im internationalen Format
+    const phone = '+4915735189824'; // <-- hier anpassen
+
+    // Nachricht
+    const message = 'Hey Selin wie sind deine Preise und dein Service?'; // <-- hier anpassen
+
+    // SMS-URI bauen
+    const smsUri = `sms:${phone}?body=${encodeURIComponent(message)}`;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('send');
+      const link = document.getElementById('smsLink');
+
+      btn.addEventListener('click', () => {
+        window.location.href = smsUri;
+      });
+
+      link.href = smsUri;
+      link.textContent = 'SMS an ' + phone + ' öffnen';
+    });
+  </script>
+</body>
+</html>
